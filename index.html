@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Emission Caclulator</title>
+        <meta charset = "utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel = "stylesheet" href= "style.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+    </head>
+    <body>
+        <div></div>
+        <div class="container">
+        
+            <h1 class="my-3 pb-2 border border-right-0 border-top-0 border-left-0" id="cool-header">🌎 Emission Caclulator</h1>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="mb-3">
+                        <div class="form-group">
+                            <label>Your Location:</label>
+                            <input class="form-control" id="searchTxt">
+                        </div>
+                    <button type="button" onclick="search()" class="btn btn-primary">&#x1F50D</button>
+                    </div>
+                    <div class="col">
+               <div class="jumbotron jumbotron-fluid" id="wrap">Nothing here to see yet.</div>
+              </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="card">
+                        <div class="card-header" id="faq">FAQ</div>
+                        <div class="card-body">
+                            <h6>What is Global Warming?</h6>
+                            <p>Over the past years, Global Warming has affected our country and the world significantly. As a result, there has been an increase in temperatures which have negatively impacted the polar ice caps, the air we breathe, and the atmosphere in general. The reason why this has been occurring is due to the release of carbon emissions, greenhouse gases, and the burning of fossil fuels. When gases like carbon are emitted, they scatter all around the planet trapping excessive heat rather than the normal amount in space. If we don't switch to renewable energy sources or find other efficient solutions, our Earth will gradually face catastrophe.</p>
+                            <h6>Who are We?</h6>
+                            <p>Knowing the effects of global warming, in particular, carbon emissions, we want to do our best to help limit the amount of global warming around the world. With our calculator, we have retrieved a vast data set that entails numerous cities around the world. On our calculator, you, as in the user will enter a specific cities. As a result, Our program will find that area and give an output of the number of carbon emissions found. Based on the effects,(whether they are high or low) suggestions are given to lower the results. Not only are we trying to teach others, but we want people to follow our requests to protect this planet.</p>
+                            <h6>Our Motto</h6>
+                            <p><b><u>Everything seems tough until you actually do it!</u></b></p>
+                            <h6>Contact Us?</h6>
+                            <p class="card-text">If you have any questions concerning Global Warming or our goals, don't hesitate to Email us at <u>"theglobalteam09@gmail.com"</u></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+              
+            </div>
+              </div>
+              <script>
+               let i = 0;
+               let len;
+               let cities;
+               const xhttp = new XMLHttpRequest();
+               xhttp.onload = function() {
+                 const xmlDoc = xhttp.responseXML;
+                 cities = xmlDoc.getElementsByTagName("row");
+                 len = cities.length;
+               }
+               xhttp.open("GET", "dataset.xml");
+               xhttp.send();
+               function displayEmissions(i) {
+                document.getElementById("wrap").innerHTML =
+                "<h1 class=\"display-4\">" +
+                cities[i].getElementsByTagName("CITY")[0].childNodes[0].nodeValue +
+                "</h1><p class=\"lead\">Emissions: " +
+                cities[i].getElementsByTagName("TEMISSIONS")[0].childNodes[0].nodeValue +
+                "</p>"
+              }
+              function search() {
+                let name = document.getElementById("searchTxt").value;
+                for (i = 0; i < len; i++) {
+                  if (name.toLowerCase() == cities[i].getElementsByTagName("CITY")[0].childNodes[0].nodeValue.toLowerCase()) {
+                    displayEmissions(i);
+                   
+                  }
+
+                }
+              }
+           </script>
+            </div>
+        </div>
+    </body>
+</html
+>
